@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePassportRequest;
 use App\Http\Requests\UpdatePassportRequest;
 use App\Models\Passport;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PassportController extends Controller
@@ -14,7 +15,7 @@ class PassportController extends Controller
      */
     public function index()
     {
-        $passport = Passport::where('user_id', auth()->id())->first();
+        $passport = Auth::user()->passport;
         return view('passports.index', compact('passport'));
     }
 
@@ -31,12 +32,7 @@ class PassportController extends Controller
      */
     public function store(StorePassportRequest $request)
     {
-        $passport = new Passport();
-        $passport->user_id = auth()->user()->id;
-        $passport->passport_number = $request->input('passport_number');
-        $passport->issue_date = $request->input('issue_date');
-        $passport->expiry_date = $request->input('expiry_date');
-        $passport->save();
+        $passport = Auth::user()->passport()->create($request->validated());
         return redirect()->route('passports.show', $passport);
     }
 

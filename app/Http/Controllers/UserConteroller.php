@@ -27,15 +27,6 @@ class UserConteroller extends Controller
         return redirect()->route('dashboard');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        $user->delete();
-        return redirect()->route('dashboard');
-    }
-
     public function login()
     {
         return view('auth.login');
@@ -53,7 +44,6 @@ class UserConteroller extends Controller
             return redirect()->route('login');
         }
     }
-
     public function logout()
     {
         Auth::logout();

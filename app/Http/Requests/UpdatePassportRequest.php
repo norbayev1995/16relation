@@ -23,7 +23,7 @@ class UpdatePassportRequest extends FormRequest
     {
         return [
             'user_id' => 'nullable|exists:users,id',
-            'passport_number' => 'required|string|unique:passports,passport_number|max:20',
+            'passport_number' => 'required|string|unique:passports,passport_number|min:7',
             'issue_date' => 'required|date',
             'expiry_date' => 'nullable|date|after:issue_date',
         ];

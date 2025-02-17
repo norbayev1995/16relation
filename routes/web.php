@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\PassportController;
-use App\Http\Controllers\UserConteroller;
+use App\Http\Controllers\AuthConteroller;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,9 +9,9 @@ Route::get('/', function () {
 })->name('dashboard')->middleware('auth');
 Route::resource('passports', PassportController::class)->middleware('auth');
 
-Route::get('login', [UserConteroller::class, 'login'])->name('login');
-Route::post('login', [UserConteroller::class, 'handleLogin'])->name('handleLogin');
-Route::get('register', [UserConteroller::class, 'register'])->name('register');
-Route::post('register', [UserConteroller::class, 'handleRegister'])->name('handleRegister');
-Route::get('logout', [UserConteroller::class, 'logout'])->name('logout');
-Route::get('404page', [UserConteroller::class, 'errorPage'])->name('errorPage');
+Route::get('login', [AuthConteroller::class, 'login'])->name('login');
+Route::post('login', [AuthConteroller::class, 'handleLogin'])->name('handleLogin');
+Route::get('register', [AuthConteroller::class, 'register'])->name('register');
+Route::post('register', [AuthConteroller::class, 'handleRegister'])->name('handleRegister');
+Route::get('logout', [AuthConteroller::class, 'logout'])->name('logout');
+Route::get('404page', [AuthConteroller::class, 'errorPage'])->name('errorPage');
